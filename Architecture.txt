@@ -1,0 +1,10 @@
+Node.js
+Spring Boot ---------------- \ ---------------- Use both of these together since they allow for unit testing and deployment in parallel
+Maven (for deployment) ----- /
+MS SQL Server
+
+
+Also figure out how to setup Selenium in Java and how to not have to open a chrome driver to run through and get into Instagram without UI interface
+
+
+Advantages of using spring boot is we can generate one single jar file that can be easily containerized and deployed in Docker to the cloud
