@@ -3,17 +3,18 @@ import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from time import sleep
+from EmailUserBot import EmailUserBot
 
 
-class InstagramUserBot():
+class InstagramUserBot(EmailUserBot):
     def __init__(self, email, full_name, username, password):
         self.email = email
         self.full_name = full_name
         self.username = username
         self.password = password
-        self.signUp(self.email, self.full_name, self.username, self.password)
+        self.signUpInstagram(self.email, self.full_name, self.username, self.password)
 
-    def signUp(self, email, full_name, username, password):
+    def signUpInstagram(self, email, full_name, username, password):
         options = webdriver.ChromeOptions()
         options.add_experimental_option("detach", True)
 
