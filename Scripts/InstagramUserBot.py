@@ -18,7 +18,7 @@ class InstagramUserBot(EmailUserBot):
         options = webdriver.ChromeOptions()
         options.add_experimental_option("detach", True)
 
-        self.driver = webdriver.Chrome(chrome_options=options)
+        self.driver = webdriver.Chrome(chrome_options=options, executable_path='/Users/nithinmahesh/Documents/MyGit/InstagramFollower/Scripts/chromedriver')
         self.driver.get("https://www.instagram.com/accounts/emailsignup/")
         sleep(3)
 

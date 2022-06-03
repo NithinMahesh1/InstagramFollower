@@ -14,11 +14,11 @@ class EmailUserBot():
         self.signUpEmail(self.first_name, self.last_name, self.username, self.password)
 
     def signUpEmail(self, email, first_name, last_name, password):
-        rand = random(1, 100000)
+        # rand = random(1, 100000)
         options = webdriver.ChromeOptions()
         options.add_experimental_option("detach", True)
 
-        self.driver = webdriver.Chrome(chrome_options=options)
+        self.driver = webdriver.Chrome(chrome_options=options, executable_path='/Users/nithinmahesh/Documents/MyGit/InstagramFollower/Scripts/chromedriver')
         self.driver.get("https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&dsh=S134305914%3A1653956329880032&biz=false&flowName=GlifWebSignIn&flowEntry=SignUp")
         sleep(3)
 
@@ -29,13 +29,13 @@ class EmailUserBot():
         last_name_input.send_keys(self.last_name)
 
         username_input = self.driver.find_element_by_xpath('//*[@id="username"]')
-        username_input.send_keys(self.username + str(rand))
+        username_input.send_keys(self.username + str(random(1,10000)))
 
         password_input = self.driver.find_element_by_xpath('//*[@id="passwd"]/div[1]/div/div[1]/input')
-        password_input.send_keys(self.password + str(rand))
+        password_input.send_keys(self.password + str(random(1,10000)))
 
         confirmPswrd_input = self.driver.find_element_by_xpath('//*[@id="confirm-passwd"]/div[1]/div/div[1]/input')
-        confirmPswrd_input.send_keys(self.password + str(rand))
+        confirmPswrd_input.send_keys(self.password + str(random(1,10000)))
 
         # Form submit button
         self.driver.find_element_by_class_name('VfPpkd-vQzf8d').click()

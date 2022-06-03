@@ -9,7 +9,7 @@ class emailBot(InstagramUserBot, EmailUserBot):
 
 
 def main():
-    # email_bot = EmailUserBot("Nathan", "Smith", "nithin", "password1")
-    instagram_bot = InstagramUserBot("testuser@gmail.com", "Test User1", "TestUser", "password1")
+    email_bot = EmailUserBot("Nathan", "Smith", "nithin", "password1")
+    # instagram_bot = InstagramUserBot("testuser@gmail.com", "Test User1", "TestUser", "password1")
 
 main()
