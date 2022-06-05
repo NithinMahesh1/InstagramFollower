@@ -13,29 +13,61 @@ class EmailUserBot():
         self.password = password
         self.signUpEmail(self.first_name, self.last_name, self.username, self.password)
 
-    def signUpEmail(self, email, first_name, last_name, password):
+    def signUpEmail(self, username, first_name, last_name, password):
         # rand = random(1, 100000)
         options = webdriver.ChromeOptions()
         options.add_experimental_option("detach", True)
 
         self.driver = webdriver.Chrome(chrome_options=options, executable_path='/Users/nithinmahesh/Documents/MyGit/InstagramFollower/Scripts/chromedriver')
-        self.driver.get("https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&dsh=S134305914%3A1653956329880032&biz=false&flowName=GlifWebSignIn&flowEntry=SignUp")
+        self.driver.get("https://mail.tutanota.com/login?noAutoLogin=true")
         sleep(3)
 
-        first_name_input = self.driver.find_element_by_xpath('//*[@id="firstName"]')
-        first_name_input.send_keys(self.first_name)
+        # Clicks the Signup option
+        self.driver.find_element_by_xpath('//*[@id="login-view"]/div[2]/div/div[3]/div/button/small').click()
 
-        last_name_input = self.driver.find_element_by_xpath('//*[@id="lastName"]')
-        last_name_input.send_keys(self.last_name)
+        # Clicks the free user option: note that user accounts are deleted after not being used for a month (aka login)
+        self.driver.find_element_by_xpath('//*[@id="login-view"]/div[2]/div/div[4]/div/div/div/button[1]/div/div').click()
 
-        username_input = self.driver.find_element_by_xpath('//*[@id="username"]')
-        username_input.send_keys(self.username + str(random(1,10000)))
+        # Adding this because of hang (might be because of the plane wifi)
+        # Clicks on the dialog signup button to open dialog box with options for free account
+        sleep(7)
+        try:
+            self.driver.find_element_by_xpath('//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div/div').click()
+        except:
+            sleep(33)
+            self.driver.find_element_by_xpath('//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div/div').click()
 
-        password_input = self.driver.find_element_by_xpath('//*[@id="passwd"]/div[1]/div/div[1]/input')
-        password_input.send_keys(self.password + str(random(1,10000)))
+        # Clicks the check box for "I do not own any other free account"
+        try:
+            self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
+        except:
+            sleep(20)
+            self.driver.find_element_by_xpath('//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div/div').click()
+            self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
 
-        confirmPswrd_input = self.driver.find_element_by_xpath('//*[@id="confirm-passwd"]/div[1]/div/div[1]/input')
-        confirmPswrd_input.send_keys(self.password + str(random(1,10000)))
+        # Clicks the check box for "I will not use this account for business"
+        self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[2]/div/input').click()
 
-        # Form submit button
-        self.driver.find_element_by_class_name('VfPpkd-vQzf8d').click()
+        # Clicks on the OK button
+        self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[3]/button[2]/div').click()
+
+        # TODO create a random int that is passed to the username
+        email_input_keys = self.driver.find_element_by_xpath('//*[@id="modal"]/div')
+        email_input_keys.send_keys(self.username)
+
+
+
+        # last_name_input = self.driver.find_element_by_xpath('//*[@id="lastName"]')
+        # last_name_input.send_keys(self.last_name)
+
+        # username_input = self.driver.find_element_by_xpath('//*[@id="username"]')
+        # username_input.send_keys(self.username + str(random(1,10000)))
+
+        # password_input = self.driver.find_element_by_xpath('//*[@id="passwd"]/div[1]/div/div[1]/input')
+        # password_input.send_keys(self.password + str(random(1,10000)))
+
+        # confirmPswrd_input = self.driver.find_element_by_xpath('//*[@id="confirm-passwd"]/div[1]/div/div[1]/input')
+        # confirmPswrd_input.send_keys(self.password + str(random(1,10000)))
+
+        # # Form submit button
+        # self.driver.find_element_by_class_name('VfPpkd-vQzf8d').click()

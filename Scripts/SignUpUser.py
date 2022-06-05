@@ -9,7 +9,9 @@ class emailBot(InstagramUserBot, EmailUserBot):
 
 
 def main():
-    email_bot = EmailUserBot("Nathan", "Smith", "nithin", "password1")
+    # TODO create a Class for creating the usernames for email and instagram
+    # TODO Might be better to have EmailUserBot and InstagramUserBot to be subclasses of this main class
+    email_bot = EmailUserBot("Nathan", "Smith", "nSmithTestUser", "password1")
     # instagram_bot = InstagramUserBot("testuser@gmail.com", "Test User1", "TestUser", "password1")
 
 main()
