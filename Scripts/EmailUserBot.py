@@ -41,7 +41,7 @@ class EmailUserBot():
         try:
             self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
         except:
-            sleep(20)
+            sleep(7)
             self.driver.find_element_by_xpath('//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div/div').click()
             self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
 
@@ -52,22 +52,6 @@ class EmailUserBot():
         self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[3]/button[2]/div').click()
 
         # TODO create a random int that is passed to the username
-        email_input_keys = self.driver.find_element_by_xpath('//*[@id="modal"]/div')
-        email_input_keys.send_keys(self.username)
-
-
-
-        # last_name_input = self.driver.find_element_by_xpath('//*[@id="lastName"]')
-        # last_name_input.send_keys(self.last_name)
-
-        # username_input = self.driver.find_element_by_xpath('//*[@id="username"]')
-        # username_input.send_keys(self.username + str(random(1,10000)))
-
-        # password_input = self.driver.find_element_by_xpath('//*[@id="passwd"]/div[1]/div/div[1]/input')
-        # password_input.send_keys(self.password + str(random(1,10000)))
-
-        # confirmPswrd_input = self.driver.find_element_by_xpath('//*[@id="confirm-passwd"]/div[1]/div/div[1]/input')
-        # confirmPswrd_input.send_keys(self.password + str(random(1,10000)))
-
-        # # Form submit button
-        # self.driver.find_element_by_class_name('VfPpkd-vQzf8d').click()
+        self.driver.find_element_by_xpath('//*[@id="signup-account-dialog"]/div/div[1]/div/div').click()
+        # email_input_keys = self.driver.find_element_by_xpath('//*[@id="signup-account-dialog"]/div/div[1]/div/div')
+        # email_input_keys.send_keys(self.username)
