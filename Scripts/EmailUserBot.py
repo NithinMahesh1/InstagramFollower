@@ -103,3 +103,34 @@ class EmailUserBot():
                 '//*[@id="modal"]/div[2]/div/div/div/div[3]/button[2]/div').click()
 
             # TODO create a random int that is passed to the username
+            sleep(5)
+            username_input = self.driver.find_element_by_xpath('//*[@id="signup-account-dialog"]/div/div[1]/div/div/div/div[1]/input')
+            username_input.send_keys(self.username)
+
+            password_input = self.driver.find_element_by_xpath('//*[@id="signup-account-dialog"]/div/div[2]/div[1]/div/div/div/div[1]/input[4]')
+            password_input.send_keys(self.password)
+
+            # Inputs repeat password field
+            repeat_password = self.driver.find_element_by_xpath('//*[@id="signup-account-dialog"]/div/div[2]/div[3]/div/div/div/div/input')
+            repeat_password.send_keys(self.password)
+
+            # Clicks terms and conditions checkbox
+            self.driver.find_element_by_xpath(
+                '//*[@id="signup-account-dialog"]/div/div[3]/div/input').click()
+
+            # Clicks "I am at least 16 years old" checkbox
+            self.driver.find_element_by_xpath(
+                '//*[@id="signup-account-dialog"]/div/div[4]/div/input').click()
+
+            # Clicks the next button on form after filling out user information
+            sleep(10)
+            self.driver.find_element_by_xpath(
+                '//*[@id="signup-account-dialog"]/div/div[5]/button/div').click()
+
+            # Clicks on the ok button after user is created
+            sleep(20)
+            self.driver.find_element_by_xpath(
+                '//*[@id="wizardDialogContent"]/div[4]/div/button').click()
+
+            # Enters password after creating new user to test it logs in fine
+            self.driver.find_element_by_xpath('//*[@id="login-view"]/div[2]/div/div[1]/form/div[2]/div/label').send_keys(self.password)
