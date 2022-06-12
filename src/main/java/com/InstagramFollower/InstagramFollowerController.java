@@ -21,7 +21,7 @@ public class InstagramFollowerController {
 
     @RequestMapping("/pythoncall")
     public String createUserScript() throws IOException {
-        ProcessBuilder builder = new ProcessBuilder("python", System.getProperty("user.dir") + "\\scripts\\helloworld.py", "1");
+        ProcessBuilder builder = new ProcessBuilder("python", System.getProperty("user.dir") + "\\scripts\\SignUpUser.py");
         Process process = builder.start();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
