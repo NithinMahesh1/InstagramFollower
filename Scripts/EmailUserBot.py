@@ -17,22 +17,13 @@ class EmailUserBot():
 
     def signUpEmail(self, username, first_name, last_name, password):
         # rand = random(1, 100000)
-        signUpButtonClick = ""
-        freeOptionClick = ""
-        iDoNotOwnOtherFreeClick = ""
-        iWillNotUseForBusinessClick = ""
-        okDialogButtonClick = ""
-
 
         print("Operating System is: ")
         if platform == "linux" or platform == "linux2":
             print("Linux")
-        elif platform == "darwin":
-            print("OSX")
-        elif platform == "win32":
-            print("Windows")
 
         if platform == "darwin":
+            print("OSX")
             options = webdriver.ChromeOptions()
             options.add_experimental_option("detach", True)
 
@@ -43,7 +34,7 @@ class EmailUserBot():
             sleep(3)
 
             # Clicks the Signup option
-            signUpButtonClick = self.driver.find_element_by_xpath('//*[@id="login-view"]/div[2]/div/div[3]/div/button/small').click()
+            self.driver.find_element_by_xpath('//*[@id="login-view"]/div[2]/div/div[3]/div/button/small').click()
 
             # Clicks the free user option: note that user accounts are deleted after not being used for a month (aka login)
             self.driver.find_element_by_xpath(
@@ -51,32 +42,33 @@ class EmailUserBot():
 
             # Adding this because of hang (might be because of the plane wifi)
             # Clicks on the dialog signup button to open dialog box with options for free account
-            sleep(7)
+            sleep(3)
             try:
-                freeOptionClick = self.driver.find_element_by_xpath(
+                self.driver.find_element_by_xpath(
                     '//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div/div').click()
             except:
                 sleep(33)
-                freeOptionClick = self.driver.find_element_by_xpath(
+                self.driver.find_element_by_xpath(
                     '//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div/div').click()
 
             # Clicks the check box for "I do not own any other free account"
             try:
-                iDoNotOwnOtherFreeClick = self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
+                self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
             except:
                 sleep(7)
-                freeOptionClick = self.driver.find_element_by_xpath(
+                self.driver.find_element_by_xpath(
                     '//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div/div').click()
-                iDoNotOwnOtherFreeClick = self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
+                self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
 
             # Clicks the check box for "I will not use this account for business"
-            iWillNotUseForBusinessClick = self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[2]/div/input').click()
+            self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[2]/div/input').click()
 
             # Clicks on the OK button
-            okDialogButtonClick = self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[3]/button[2]/div').click()
+            self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[3]/button[2]/div').click()
 
 
         elif platform == "win32":
+            print("Windows")
             options = webdriver.ChromeOptions()
             options.add_experimental_option("detach", True)
 
@@ -85,41 +77,29 @@ class EmailUserBot():
             self.driver.get("https://mail.tutanota.com/login?noAutoLogin=true")
             sleep(3)
 
-        # Clicks the Signup option
-        self.driver.find_element_by_xpath('//*[@id="login-view"]/div[2]/div/div[3]/div/button/small').click()
-        # //*[@id="login-view"]/div[2]/div/div[4]/div/div/div/button[1]/div/div
+            # Clicks the More Option
+            self.driver.find_element_by_xpath('//*[@id="login-view"]/div[2]/div/div[3]/div/button/small').click()
 
-        # Clicks the free user option: note that user accounts are deleted after not being used for a month (aka login)
-        self.driver.find_element_by_xpath(
-            '//*[@id="login-view"]/div[2]/div/div[4]/div/div/div/button[1]/div/div').click()
-
-        # Adding this because of hang (might be because of the plane wifi)
-        # Clicks on the dialog signup button to open dialog box with options for free account
-        sleep(7)
-        try:
+            # Clicks the SignUpButton to open dialog
+            sleep(5)
             self.driver.find_element_by_xpath(
-                '//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div/div').click()
-        except:
-            sleep(33)
+                '//*[@id="login-view"]/div[2]/div/div[4]/div/div/div/button[1]/div').click()
+
+            # Clicks the free account button in dialog
+            sleep(5)
             self.driver.find_element_by_xpath(
-                '//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div/div').click()
+                '//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div').click()
 
-        # Clicks the check box for "I do not own any other free account"
-        try:
-            self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
-        except:
-            sleep(7)
+            # Clicks the "I do not own any other Free Account" checkbox
             self.driver.find_element_by_xpath(
-                '//*[@id="upgrade-account-dialog"]/div[2]/div[1]/div[1]/div[5]/button/div/div').click()
-            self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
+                '//*[@id="modal"]/div[2]/div/div/div/div[2]/div[1]/div/input').click()
 
-        # Clicks the check box for "I will not use this account for business"
-        self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[2]/div[2]/div/input').click()
+            # Clicks the "I will not use this account for business" checkbox
+            self.driver.find_element_by_xpath(
+                '//*[@id="modal"]/div[2]/div/div/div/div[2]/div[2]/div/input').click()
 
-        # Clicks on the OK button
-        self.driver.find_element_by_xpath('//*[@id="modal"]/div[2]/div/div/div/div[3]/button[2]/div').click()
+            # Clicks the ok button to submit form
+            self.driver.find_element_by_xpath(
+                '//*[@id="modal"]/div[2]/div/div/div/div[3]/button[2]/div').click()
 
-        # TODO create a random int that is passed to the username
-        self.driver.find_element_by_xpath('//*[@id="signup-account-dialog"]/div/div[1]/div/div').click()
-        # email_input_keys = self.driver.find_element_by_xpath('//*[@id="signup-account-dialog"]/div/div[1]/div/div')
-        # email_input_keys.send_keys(self.username)
+            # TODO create a random int that is passed to the username
