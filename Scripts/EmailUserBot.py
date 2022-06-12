@@ -1,21 +1,16 @@
-# import selenium
-# import os
 import random
 from selenium import webdriver
-# from selenium.webdriver.chrome.options import Options
 from time import sleep
 from sys import platform
 
 
 class EmailUserBot():
-    def __init__(self, first_name, last_name, username, password):
-        self.first_name = first_name
-        self.last_name = last_name
+    def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.signUpEmail(self.first_name, self.last_name, self.username, self.password)
+        self.signUpEmail(self.username, self.password)
 
-    def signUpEmail(self, username, first_name, last_name, password):
+    def signUpEmail(self, username, password):
         # rand = random(1, 100000)
 
         print("Operating System is: ")
@@ -128,9 +123,9 @@ class EmailUserBot():
                 '//*[@id="signup-account-dialog"]/div/div[5]/button/div').click()
 
             # Clicks on the ok button after user is created
-            sleep(20)
-            self.driver.find_element_by_xpath(
-                '//*[@id="wizardDialogContent"]/div[4]/div/button').click()
+            sleep(50)
+            # self.driver.find_element_by_xpath(
+            #     '//*[@id="wizardDialogContent"]/div[4]/div/button').click()
 
             # Enters password after creating new user to test it logs in fine
             self.driver.find_element_by_xpath('//*[@id="login-view"]/div[2]/div/div[1]/form/div[2]/div/label').send_keys(self.password)
